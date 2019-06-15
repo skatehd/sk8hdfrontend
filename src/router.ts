@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-
+import Event from './views/Event.vue';
+import Registration from './views/Register.vue';
+import Login from './views/Login.vue';
+import NotFound from './views/404.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -14,6 +17,22 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/event/:id',
+      name: 'event',
+      component: Event,
+      props: true,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Registration,
+    },
+    {
+      path: '/login',
+      name: 'loginr',
+      component: Login,
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -21,5 +40,10 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
+    {
+      path: '*',
+      name: '404',
+      component: NotFound,
+    }
   ],
 });

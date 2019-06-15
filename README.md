@@ -10,20 +10,11 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Deploy
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+npm run deploy
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+This will create the Website in the /dist folder. Note that the dist fold is ignored in the main git repository, and has it's own repository, which is the gihub page repository. 
+The script will try initialize the dist folder as a git repoisitory and then force push the created repository to the github pages repository.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

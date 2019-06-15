@@ -1,25 +1,119 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <Push class="visible-mobile" right>
+      <img src="logo.png" class="burger__logo">
+      <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link>
+      </Push>
+      <div class="visible-desktop header-desktop" >
+      <img src="logo.png" class="header__logo header__left">
+      <div v-if="$isLoggedIn"> 
+        {{$user.username}}
+      </div> 
+      |
+      <router-link  to="#antrag">Home</router-link> 
+      |
+      <router-link  to="/">Home</router-link> 
+      |
+      <router-link to="/about">About</router-link>
+
+        </div>
     </div>
     <router-view/>
   </div>
 </template>
 <style lang="stylus">
+
+
+body, html
+  height: 100%
+  margin 0
+
+body
+  background #000
+
+.header__logo
+  height: 2rem
+
+.burger__logo
+  height: 3rem
+
+.bm-burger-button
+  position: fixed
+  top: 1rem
+  right: 1rem
+
+.header-desktop
+  position: fixed
+  padding: 1em
+  background rgba(0,0,0,0.7)
+  width: 100%
+
+.header__left 
+  float: left
+
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   text-align center
-  color #2c3e50
+  color #999999
+  height: 100%
 
 #nav
-  padding 30px
+  height 2rem
+  z-index: 1
+  position: absolute 
+  top: 0
+  left: 0
+  width 100%
   a
     font-weight bold
     color #2c3e50
     &.router-link-exact-active
       color #42b983
+
+.btn 
+  background-color: #000
+  border-color: #ffffff
+  padding: 8px
+  border-radius 8px
+
+
+/* Visibility Helpers */
+@media only screen and (min-width: 769px) {
+  .visible-mobile, .visible-tablet, .hidden-desktop {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  .visible-mobile, .hidden-tablet, .visible-desktop {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .hidden-mobile, .visible-tablet, .visible-desktop {
+    display: none !important;
+  }
+}
 </style>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Push } from 'vue-burger-menu'
+import Component from 'vue-class-component'
+
+@Component({
+  components: {
+    Push
+  }
+})
+export default class Home extends Vue {
+
+
+}
+
+</script>
