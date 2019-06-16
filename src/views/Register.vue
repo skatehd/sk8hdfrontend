@@ -2,7 +2,15 @@
   <div class='auth'>
       <img src="logo.png" class="auth_logo">
        <h4>Registrieren</h4>
-    <form @submit.prevent="register">
+
+       <div v-if="success">
+        <p class="register__success_emoji">👍</p>
+        <h1>
+          Registrierung Erfolgreich
+        </h1>
+       </div>
+
+    <form v-if="!success" @submit.prevent="register" v-loading="loading"  element-loading-background="rgba(0, 0, 0, 0.8)">
       <label for="name">Name</label>
       <div>
           <el-input id="name" type="text" v-model="name" required autofocus/>
@@ -20,7 +28,7 @@
 <br>
       <label for="password-confirm">Passwort Wiederholen</label>
       <div>
-          <el-input id="password-confirm" type="password" v-model="password_confirmation" required/>
+          <el-input id="password-confirm" type="password" v-model="password_confirmation" @keyup.enter.native="register" required/>
       </div>
       <br>
       <div>
@@ -40,6 +48,10 @@
 .auth_logo
   height: 200px
 
+.register__success_emoji
+  font-size: 5rem
+
+
 </style>
 
 
@@ -57,6 +69,8 @@ export default class Home extends Vue {
   password  =  "";
   password_confirmation= "";
  is_admin= null;
+  success=false;
+  loading = false;
 
   register() {
     if(this.password !== this.password_confirmation){
@@ -65,6 +79,7 @@ export default class Home extends Vue {
       return;
     }
       console.log('Registering')
+      this.loading = true;
         let data = {
           username: this.name,
           email: this.email,
@@ -74,8 +89,16 @@ export default class Home extends Vue {
         }
         this.$store.dispatch('register', data)
        .then(
-         () => this.$router.push('/'), 
+         () => {
+                 this.loading = false;
+           this.success = true;
+           setTimeout(() => 
+           this.$router.push('/'),
+           1000 
+           )
+        },
        error => {
+         this.loading = false;
          console.log(error.response)
         Object.keys(error.response.data)
         .forEach(key => 

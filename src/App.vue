@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <div id="nav">
       <Push class="visible-mobile" right>
-      <img src="logo.png" class="burger__logo">
+      <img src="/logo.png" class="burger__logo">
       <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link>
       </Push>
@@ -105,6 +105,7 @@ body
 import Vue from 'vue'
 import { Push } from 'vue-burger-menu'
 import Component from 'vue-class-component'
+import { cloneDeep} from 'lodash'
 
 @Component({
   components: {
@@ -113,6 +114,19 @@ import Component from 'vue-class-component'
 })
 export default class Home extends Vue {
 
+  // This is to make SPA on github work: 
+  // all pages other than index and static will be 404'd 
+  // In the custom 404 we attach the current route to sessionStorage and redirect to index
+  // here we have to set the route accordingly
+  created() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != window.location.pathname) {
+        this.$router.push(redirect.replace(/^.*\/\/[^\/]+/, ''));
+      }
+      else {
+      }
+  }
 
 }
 

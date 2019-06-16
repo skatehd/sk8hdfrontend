@@ -12,8 +12,7 @@ function login({commit}: any, user: any){
     .then(resp => {
       const token = resp.data.key
       localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = token
-      commit('auth_success', token, {username: user.username})
+      commit('auth_success', {token, user})
       resolve(resp)
     })
     .catch(err => {
@@ -29,14 +28,12 @@ function register({commit}: any, user: any){
     commit('auth_request')
     axios({url: `${baseUrl}/auth/registration/`, data: user, method: 'POST' })
     .then(resp => {
-      const token = resp.data.token
+      const token = resp.data.key
       const user = resp.data.user
       localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = token
-      commit('auth_success', token, user)
+      commit('auth_success', {token, user})
       resolve(resp)
-    })
-    .catch(err => {
+    }, err => {
       commit('auth_error', err)
       localStorage.removeItem('token')
       reject(err)
@@ -48,7 +45,6 @@ function logout({commit}: any){
   return new Promise((resolve, reject) => {
     commit('logout')
     localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
     resolve()
   })
 }
@@ -70,6 +66,7 @@ export default new Vuex.Store({
       state.status = 'loading'
     },
     auth_success(state: State, payload: {token: string, user: string}){
+      console.log('Auth success, setting token ')
       state.status = 'success'
       state.token = payload.token
       state.user = payload.user

@@ -2,7 +2,8 @@
   <div class='auth'>
       <img src="logo.png" class="auth_logo">
        <h4>Einloggen</h4>
-    <form @submit.prevent="register">
+    <form @submit.prevent="register" v-loading="loading"  element-loading-background="rgba(0, 0, 0, 0.8)"
+>
       <label for="name">Name</label>
       <div>
           <el-input id="name" type="text" v-model="name" required autofocus/>
@@ -11,7 +12,7 @@
      
       <label for="password">Passwort</label>
       <div>
-          <el-input id="password" type="password" v-model="password" required/>
+          <el-input id="password" type="password" v-model="password" @keyup.enter.native="login"  required/>
       </div>
       <br>
       <div>
@@ -45,9 +46,10 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class Home extends Vue {
   name= "";
   password  =  "";
+  loading = false;
 
   login() {
-   
+      this.loading = true;
       console.log('Logging in')
         let data = {
           username: this.name,
@@ -55,8 +57,12 @@ export default class Home extends Vue {
         }
         this.$store.dispatch('login', data)
        .then(
-         () => this.$router.push('/'), 
+         () => {
+                 this.loading = false;
+           this.$router.push('/')
+           }, 
        error => {
+         this.loading = false;
          console.log(error.response)
         Object.keys(error.response.data)
         .forEach(key => 
@@ -64,7 +70,7 @@ export default class Home extends Vue {
             // @ts-ignore
             (message :string) => this.$message({message: `${key}: ${message}`, type: 'error'}) 
           )
-        )
+     )
 })
   }
 }

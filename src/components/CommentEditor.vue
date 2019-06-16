@@ -1,5 +1,5 @@
 <template>
-        <div class='edit_comment__container' :loading="loading">
+        <div class='edit_comment__container' v-loading="loading"  element-loading-background="rgba(0, 0, 0, 0.8)">
     <textarea class="regular-input" v-model="input" placeholder="Klicken um einen Kommentar zu schreiben...."></textarea>
 
     <emoji-picker @emoji="append" :search="search">

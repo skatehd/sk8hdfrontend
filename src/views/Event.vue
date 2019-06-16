@@ -20,8 +20,8 @@
       :replyPath='replyPath'
       class="event__comments">
       </CommentComponent>
-      <div class="event__comment-editor">
-      <CommentEditor @send="sendMessage" :loading='loading'></CommentEditor>
+      <div v-if="$isLoggedIn" class="event__comment-editor">
+      <CommentEditor  @send="sendMessage" :loading='loading'></CommentEditor>
       </div>
       </div>
   </div>
@@ -92,6 +92,9 @@ sendMessage(message: string){
         this.loadComments();
       },
       error => {
+        // @ts-ignore
+        this.$message('Irgendwas hat nicht geklappt, versuche es später nochmal')
+        this.loading = false;
         //TODO
       }
     );
@@ -111,7 +114,7 @@ formatdate(datestring: string) {
       if(this.event.image !== null){
           return this.event.image;
       }
-      return 'placeholder.jpg'
+      return '/placeholder.jpg'
   }
 
   loadComments() {
