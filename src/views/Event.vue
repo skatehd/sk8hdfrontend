@@ -84,7 +84,6 @@ get replyPath() {
 }
 
 sendMessage(message: string){
-  console.log('sending message')
   this.loading = true;
   axios.post(`${apiUrl}/event/${this.id}/comments/`, {
     content: message,
@@ -118,9 +117,7 @@ formatdate(datestring: string) {
   loadComments() {
       axios.get(`${apiUrl}/event/${this.id}/comments/`).then(
       result => {
-        console.log(result.data)
        this.comments = buildCommentTree(result.data);
-       console.log(this.comments)
        this.loading = false;
              },
       error => {
@@ -134,7 +131,6 @@ formatdate(datestring: string) {
   created(){
     axios.get(`${apiUrl}/event/${this.id}/`).then(
       result => {
-       console.log(result.data)
        this.event = result.data
              },
       error => {

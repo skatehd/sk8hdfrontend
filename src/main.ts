@@ -25,10 +25,7 @@ Vue.prototype.$isLoggedIn = store.getters.isLoggedIn;
 Vue.prototype.$user = store.getters.user;
 
 axios.interceptors.request.use(config => 
-  {if ( store.getters.token != null ) {
-    console.log('attaching token')
-    console.log(store.getters.token)
-
+  {if ( store.getters.token !== null && store.getters.token !== undefined && store.getters.token !== '' ) {
     config.headers.Authorization = `Token ${store.getters.token}`;
   }
   return config;

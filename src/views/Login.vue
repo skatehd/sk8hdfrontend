@@ -61,6 +61,7 @@ export default class Home extends Vue {
         Object.keys(error.response.data)
         .forEach(key => 
           error.response.data[key].forEach(
+            // @ts-ignore
             (message :string) => this.$message({message: `${key}: ${message}`, type: 'error'}) 
           )
         )

@@ -1,7 +1,7 @@
 <template>
         <div class='comment_card' >
             <!-- <img :src="imageSrc()" class='event_card__image'> -->
-              {{formatdate(commentTree.date)}}
+             {{commentTree.owner.username}} {{formatdate(commentTree.date)}}
             <p>
             {{commentTree.content}} 
            </p>  

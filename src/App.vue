@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <Push class="visible-mobile" right>
       <img src="logo.png" class="burger__logo">
       <router-link to="/">Home</router-link> 
@@ -19,7 +19,7 @@
       <router-link to="/about">About</router-link>
 
         </div>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>
