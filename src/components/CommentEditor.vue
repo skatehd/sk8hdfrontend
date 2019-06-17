@@ -81,7 +81,7 @@ export default class CommentEditor extends Vue {
     position: absolute
     bottom: 8px
     right: 0
-
+    color: #fff
 }
 
 
@@ -98,6 +98,7 @@ export default class CommentEditor extends Vue {
     width: 100%;
     height: 12rem;
     background-color #000
+    color #fff
     resize: none;
 }
 

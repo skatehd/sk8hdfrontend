@@ -20,7 +20,7 @@
       :replyPath='replyPath'
       class="event__comments">
       </CommentComponent>
-      <div v-if="$isLoggedIn" class="event__comment-editor">
+      <div v-if="isLoggedIn()" class="event__comment-editor">
       <CommentEditor  @send="sendMessage" :loading='loading'></CommentEditor>
       </div>
       </div>
@@ -28,13 +28,13 @@
 </template>
 
 <style lang="stylus">
-.event 
-    margin-top: 4rem
+
  
 .event__content
    max-width: 50rem
    margin-left auto
    margin-right auto
+   padding: 16px
    text-align left 
   
 .event__comment-editor

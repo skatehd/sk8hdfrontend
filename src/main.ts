@@ -21,8 +21,7 @@ Vue.component(Button.name, Button)
 Vue.component(Message.name, Message)
 
 Vue.prototype.$message = Message;
-Vue.prototype.$isLoggedIn = store.getters.isLoggedIn;
-Vue.prototype.$user = store.getters.user;
+
 
 axios.interceptors.request.use(config => 
   {
@@ -32,6 +31,14 @@ axios.interceptors.request.use(config =>
   return config;
   }, (err) =>  {
   return Promise.reject(err);
+  })
+
+  Vue.mixin({
+    methods: {
+      isLoggedIn: () => {
+        return store.getters.isLoggedIn;
+      }
+    }
   })
 
 new Vue({

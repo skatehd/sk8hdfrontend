@@ -176,6 +176,11 @@ export default class Home extends Vue {
 
   events = [];
 
+  mounted() {
+   
+    
+  }
+
   created(){
     axios.get(apiUrl + '/events/').then(
       result => {

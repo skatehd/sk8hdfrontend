@@ -1,25 +1,22 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <Push class="visible-mobile" right>
-      <img src="/logo.png" class="burger__logo">
-      <router-link to="/">Home</router-link> 
-      <router-link to="/about">About</router-link>
+    <div id="nav">
+      <Push class="hidden-desktop" right>
+      <img @click="home" src="/logo.png" class="burger__logo clickable">
+      <!-- <router-link to="/">Home</router-link> 
+      <router-link to="/about">About</router-link> -->
       </Push>
       <div class="visible-desktop header-desktop" >
-      <img src="logo.png" class="header__logo header__left">
-      <div v-if="$isLoggedIn"> 
-        {{$user.username}}
-      </div> 
-      |
-      <router-link  to="#antrag">Home</router-link> 
-      |
+      <img src="/logo.png"  @click="home" class="header__logo header__left clickable">
+      <div v-if="isLoggedIn()" class="nav__logout" @click="logout"> 
+        Ausloggen
+     </div> 
       <router-link  to="/">Home</router-link> 
-      |
-      <router-link to="/about">About</router-link>
+      <!-- |
+      <router-link to="/about">About</router-link> -->
 
         </div>
-    </div> -->
+    </div>
     <router-view/>
   </div>
 </template>
@@ -32,6 +29,9 @@ body, html
 
 body
   background #000
+
+.clickable
+  cursor: pointer
 
 .header__logo
   height: 2rem
@@ -52,6 +52,11 @@ body
 
 .header__left 
   float: left
+
+.nav__logout
+  float: right 
+  cursor pointer
+  margin-right: 2rem
 
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
@@ -113,6 +118,18 @@ import { cloneDeep} from 'lodash'
   }
 })
 export default class Home extends Vue {
+
+  home(){
+    this.$router.push('/');
+  }
+
+  logout() {
+    this.$store.dispatch('logout')
+    .then(() => {
+      
+    }
+    );
+  }
 
   // This is to make SPA on github work: 
   // all pages other than index and static will be 404'd 
