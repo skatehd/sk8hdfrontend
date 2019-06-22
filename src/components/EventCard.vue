@@ -5,7 +5,7 @@
               <div class='event_card__content'>
              <div class='event__time'>🕑 {{formatdate(event.starttime)}} <br>
                <div v-if="event.endtime !== null">
-                   - {{formatdate(event.endtime)}}
+                  &nbsp; - {{formatdate(event.endtime)}}
                 </div> 
               </div>
 
@@ -50,7 +50,8 @@ export default class EventCard extends Vue {
 
 <style scoped lang="stylus">
 .event_card
-  box-shadow 1px 1px 1px 1px #ccc
+  // box-shadow 1px 1px 1px 1px #ccc
+  border-style dashed
   transition: 0.3s;
   margin: 2 rem
   border-radius: 16px;
@@ -58,15 +59,19 @@ export default class EventCard extends Vue {
   z-index: 2
   overflow: hidden
   cursor: pointer
+  margin: auto
+  max-width 360px
+  width: 100%
 
 .event_card__content
     padding: 2rem
 
 .event__time
+  display: block
   float: right
 
 .event_card:hover 
-  box-shadow 3px 3px 3px 3px #ccc
+  // box-shadow 3px 3px 3px 3px #ccc
 
 .event_card__image
   width: 100%

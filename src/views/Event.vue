@@ -2,14 +2,26 @@
   <div class="event">
       <img class="event__image" :src="imageSrc()">
       <div class="event__content">
+          <div class='event__time mt-16'><span class='large-icon'>🕑</span> 
+            <div class='ml-16'>&nbsp;&nbsp;{{formatdate(event.starttime)}} <br>
+                <div v-if="event.endtime !== null">
+                    - {{formatdate(event.endtime)}}
+                  </div> 
+            </div>  
+          </div>
           <h1 style="text-align: left">
               {{event.title}}
           </h1
-          ><div class='event__time'><span class='large-icon'>🕑</span> {{formatdate(event.starttime)}} <br>
-               <div v-if="event.endtime !== null">
-                   - {{formatdate(event.endtime)}}
-                </div> 
-              </div>
+          >
+          <l-map
+          v-if="event.location !== null"
+        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+        :center="event.location.coordinates"
+        :zoom="15"
+        style="height: 400px; width: 100%">
+              <l-tile-layer url="http://tile.stamen.com/toner/{z}/{x}/{y}.png"></l-tile-layer>
+                  <l-marker :lat-lng="event.location.coordinates" ></l-marker>
+        </l-map>
 
           <span v-html="this.event.description"></span>
 
@@ -18,18 +30,22 @@
       v-for="comment of comments" v-bind:key="comment.id" 
       :commentTree="comment" 
       :replyPath='replyPath'
+      @changes="loadComments()"
       class="event__comments">
       </CommentComponent>
       <div v-if="isLoggedIn()" class="event__comment-editor">
-      <CommentEditor  @send="sendMessage" :loading='loading'></CommentEditor>
+      <CommentEditor  @send="sendMessage" v-loading='loading'></CommentEditor>
       </div>
       </div>
   </div>
 </template>
 
 <style lang="stylus">
+.event__time
+  float right 
+  display flex
 
- 
+
 .event__content
    max-width: 50rem
    margin-left auto
@@ -62,6 +78,7 @@ import { buildCommentTree } from '@/comment_util';
 import { CommentTree } from '../models';
 import CommentEditor from '@/components/CommentEditor.vue'; 
 
+
 @Component({
   components: {
     EventCard,
@@ -74,14 +91,26 @@ export default class Home extends Vue {
     @Prop({required: true})
     id!: number;
 
-  event = {image: null};
+  event: {
+    image: null | string;
+    location: null | {
+      coordinates: number[]
+    }
+  } = {image: null, location: null};
   comments: CommentTree[] = [];
 
   loading = false;
 
+  mapOptions = {
+          zoomControl: true,
+          attributionControl: false,
+          zoomSnap: true
+        };
+
 get replyPath() {
   return `${apiUrl}/event/${this.id}/comments/`
 }
+
 
 sendMessage(message: string){
   this.loading = true;
@@ -135,6 +164,9 @@ formatdate(datestring: string) {
     axios.get(`${apiUrl}/event/${this.id}/`).then(
       result => {
        this.event = result.data
+       if(this.event.location !== null) {
+         this.event.location!.coordinates! = this.event.location!.coordinates.reverse();
+       }
              },
       error => {
         console.log('Error loading event')

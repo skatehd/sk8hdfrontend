@@ -3,6 +3,14 @@
     <div id="nav">
       <Push class="hidden-desktop" right>
       <img @click="home" src="/logo.png" class="burger__logo clickable">
+       <div v-if="isLoggedIn()" class="nav__logout" @click="logout"> 
+        Ausloggen
+      </div> 
+     <div v-else class='burger-menu__login-register' >
+       <p @click="$router.push('/login')" class="router-link">Anmelden</p> <br/>
+       <p @click="$router.push('/register')" class="router-link">Registrieren</p> <br/>
+       
+     </div>
       <!-- <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link> -->
       </Push>
@@ -11,6 +19,9 @@
       <div v-if="isLoggedIn()" class="nav__logout" @click="logout"> 
         Ausloggen
      </div> 
+     <div v-else class="nav__logout">
+       <router-link to="/login">Anmelden</router-link> | <router-link to="/register">Registrieren</router-link>
+     </div>
       <router-link  to="/">Home</router-link> 
       <!-- |
       <router-link to="/about">About</router-link> -->
@@ -21,7 +32,11 @@
   </div>
 </template>
 <style lang="stylus">
+@import './global.styl';
 
+.router-link 
+  color: white
+  cursor pointer
 
 body, html
   height: 100%
@@ -38,6 +53,9 @@ body
 
 .burger__logo
   height: 3rem
+
+.burger-menu__login-register
+  display: block
 
 .bm-burger-button
   position: fixed

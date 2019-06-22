@@ -8,10 +8,10 @@
         <div class="main__header_content">
           <img src="animated_logo.gif" id="animated_logo">
           <h1 class="visible-desktop">Das die Website von HD Skateboarding e.V.</h1>
-          <p class="visible-desktop">
+          <!-- <p class="visible-desktop">
             HD Skateboarding e.V. ist der Skateboard Verein von Heidelberg.
             <br>Alle machen mit - egal ob Mädchen oder Junge, Albaner oder Sachse, sogar unsere Freunde von der Polizei kommen jeden Tag am Skatepark vorbei, weil wir so cool skaten.
-          </p>
+          </p> -->
         </div>
       </div>
 
@@ -20,8 +20,10 @@
 
         <div>
           <h1>📅 Anstehende Events</h1>
-          <EventCard v-for='event of events' v-bind:key='event.id' :event='event'>              
+          <div class='main__events'>
+          <EventCard v-for='event of events.slice(0,4)' v-bind:key='event.id' :event='event'>              
           </EventCard>
+          </div>
         </div>
 
         <h1 id="about">
@@ -120,6 +122,14 @@
 .main__about
   max-width 50rem
   margin: auto
+
+.main__events
+  display grid 
+  grid-template-columns repeat(auto-fit, minmax(100px, 360px))
+  grid-gap: 20px
+  align-items: center;
+  justify-items: center;
+  justify-content space-evenly
 
 
 #main__video {

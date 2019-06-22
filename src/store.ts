@@ -45,6 +45,8 @@ function logout({commit}: any){
   return new Promise((resolve, reject) => {
     commit('logout')
     localStorage.removeItem('token')
+    // Clear ALL cookies
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     resolve()
   })
 }
