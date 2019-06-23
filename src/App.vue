@@ -97,11 +97,6 @@ body
     &.router-link-exact-active
       color #42b983
 
-.btn 
-  background-color: #000
-  border-color: #ffffff
-  padding: 8px
-  border-radius 8px
 
 
 /* Visibility Helpers */

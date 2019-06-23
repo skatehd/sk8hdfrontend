@@ -1,7 +1,7 @@
 <template>
-  <div class='login-register'>
+  <div class='login-register txt-center'>
   <p>{{top}}</p>
-         <router-link to="/login">Anmelden</router-link> oder <router-link to="/register">Registrieren</router-link>
+         <a @click="$router.push('/login')" class="link">Anmelden</a> oder <a @click="$router.push('/register')" class="link">Registrieren</a>
   <p>{{bottom}}</p>
   </div>
 </template>
@@ -21,7 +21,9 @@ import { Component, Vue, Prop } from "vue-property-decorator";
   }
 })
 export default class Home extends Vue {
-  top= "";
-  bottom = "";
+  @Prop({default: ''})
+  top!: string;
+  @Prop({default: ''})
+  bottom!: string;
 }
 </script>

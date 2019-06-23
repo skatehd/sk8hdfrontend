@@ -9,7 +9,8 @@ import {
   Input,
   Button,
   Message,
-  Loading
+  Loading,
+  Dialog,
 } from 'element-ui'
 
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
@@ -37,6 +38,7 @@ Vue.use(Loading.directive);
 Vue.component(Input.name, Input)
 Vue.component(Button.name, Button)
 Vue.component(Message.name, Message)
+Vue.component(Dialog.name, Dialog)
 
 Vue.prototype.$message = Message;
 

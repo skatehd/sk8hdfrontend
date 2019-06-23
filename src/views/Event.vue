@@ -36,6 +36,7 @@
       <div v-if="isLoggedIn()" class="event__comment-editor">
       <CommentEditor  @send="sendMessage" v-loading='loading'></CommentEditor>
       </div>
+      <LoginOrRegister v-else top="Du musst dich" bottom="um einen Kommentar zu schreiben"></LoginOrRegister>
       </div>
   </div>
 </template>
@@ -77,13 +78,15 @@ import apiUrl from '@/apiUrl';
 import { buildCommentTree } from '@/comment_util';
 import { CommentTree } from '../models';
 import CommentEditor from '@/components/CommentEditor.vue'; 
+import LoginOrRegister from '@/components/LoginOrRegister.vue';
 
 
 @Component({
   components: {
     EventCard,
     CommentEditor,
-    CommentComponent
+    CommentComponent,
+    LoginOrRegister
   }
 })
 export default class Home extends Vue {

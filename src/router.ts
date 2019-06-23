@@ -5,6 +5,7 @@ import Event from './views/Event.vue';
 import Registration from './views/Register.vue';
 import Login from './views/Login.vue';
 import NotFound from './views/404.vue';
+import BilloBoard from './views/BilloBoard.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -31,6 +32,11 @@ export default new Router({
       path: '/login',
       name: 'loginr',
       component: Login,
+    },
+    {
+      path: '/board',
+      name: 'board',
+      component: BilloBoard,
     },
     {
       path: '/about',

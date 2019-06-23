@@ -7,7 +7,7 @@
              <span class="txt-small txt-emph">{{commentTree.owner.username}} &nbsp;</span> 
              <span class="txt-small">{{formatdate(commentTree.date)}}</span>
            <button class="btn reply-btn" @click="reply = !reply">↩️</button>
-           <button v-if="commentTree.children.length > 0" class="btn reply-btn" @click="collapse = !collapse">{{collapse ? '📖' : '📕' }}</button>
+           <button v-if="commentTree.children.length > 0" class="btn reply-btn " @click="collapse = !collapse">{{collapse ? '🙉' : '🙈' }}</button>
          <CommentEditor v-if="reply"  @send="sendMessage" class="comment__editor"></CommentEditor>
         <div v-if="!collapse">
         <CommentComponent  v-for="comment of commentTree.children" v-bind:key="comment.id"
@@ -71,9 +71,9 @@ export default class CommentComponent extends Vue {
   }
 
 
-  mounted(){
-      console.log(this.commentTree)
-  }
+  // mounted(){
+  //     console.log(this.commentTree)
+  // }
 
 
   @Emit('changes')
@@ -91,7 +91,7 @@ export default class CommentComponent extends Vue {
 .comment_card
   // border-style: solid 
   // padding: 1rem
-  padding-left: 2 rem
+  padding-left: 1 rem
   padding-bottom: 1 rem
   margin 0
   // border-width 1px
@@ -113,7 +113,7 @@ export default class CommentComponent extends Vue {
   margin-bottom 0
 
 .subcomment
-  border-left 2px dashed
+  border-left 2px dotted
 
 .reply-btn
   border-style: none
