@@ -16,7 +16,11 @@ import {
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import infiniteScroll from 'vue-infinite-scroll'
 
+
+
+Vue.use(infiniteScroll)
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);

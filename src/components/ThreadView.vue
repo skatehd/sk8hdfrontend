@@ -1,7 +1,7 @@
 <template>
         <div class='thread_wrapper' v-loading="loading">
             <h1>{{thread.title}}</h1>
-             <span class="txt-small txt-emph">{{thread.owner}} &nbsp;</span> 
+             <span class="txt-small txt-emph">{{thread.owner.username}} &nbsp;</span> 
              <span class="txt-small">{{formatdate(thread.date)}}</span>
             <p>{{thread.content}}</p> 
             <!-- '🙉' : '🙈' -->

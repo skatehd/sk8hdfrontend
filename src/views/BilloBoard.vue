@@ -5,21 +5,22 @@
         <br>
         <input type="text" class="txt-input mt-16" placeholder="🔎" v-model='search'>
     <h2 >Threads:</h2>
-    <div class="ml-2rem mr-2rem" v-loading="searching"  element-loading-background="rgba(0, 0, 0, 0.8)">
+    <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading" class="ml-2rem mr-2rem" v-loading="searching"  element-loading-background="rgba(0, 0, 0, 0.8)">
     <ThreadView v-for="thread in threads" :thread="thread" v-bind:key="thread.id"></ThreadView>
     </div>
     <el-dialog   
     class='dialog'
+
     title="Einen neuen Thread erstellen"
     :visible.sync="dialogVisible">
         <p>
             Titel:
         </p> 
-        <input class="board__edit_title" type="text" v-model="title">
+        <input class="board__edit_title txt-input fill-width mr-2rem" type="text" v-model="title">
         <p>
             Text: 
         </p>
-        <textarea class="txt-input" v-model="content"></textarea>
+        <textarea class="txt-input fill-width mr-2rem" v-model="content"></textarea>
         <br>
         <button class="btn mt-16" @click="createThread()">Thread Erstellen</button>
 
@@ -32,6 +33,7 @@
     width: 100%
     background-color: #000000
     color: #fff
+
 
 </style>
 
@@ -61,6 +63,8 @@ export default class BilloBoard extends Vue {
     content = '';
     search = '';
 
+    nextApiCall: string | null = null;
+
     @Watch('search')
     onSearchChange(query: string){
         this.searching = true
@@ -75,6 +79,7 @@ export default class BilloBoard extends Vue {
                 result => {
                     this.searching = false;
                     this.threads = result.data.results
+                    this.nextApiCall = result.data.next
                 } 
             )
     }
@@ -90,6 +95,7 @@ export default class BilloBoard extends Vue {
                 this.title = '';
                 this.content = '';
                 this.loading = false;
+                this.loadThreads();
             },
         error => {
             // @ts-ignore
@@ -97,14 +103,29 @@ export default class BilloBoard extends Vue {
         })
     }
 
+    loadMore(){
+        if(this.nextApiCall === null) {
+            return
+        } 
+        this.loading = true;
+         axios.get(this.nextApiCall)
+            .then(
+                result => {
+                    this.loading = false;
+                    this.threads.push(...result.data.results)
+                    this.nextApiCall = result.data.next
+                    console.log(this.threads)
+                } 
+            )
+    }
+
     loadThreads(){
          axios.get(`${apiUrl}/board/`)
             .then(
                 result => {
                     this.loading = false;
-                    console.log(result.data)
                     this.threads = result.data.results
-                    console.log(this.threads)
+                    this.nextApiCall = result.data.next
                 } 
             )
     }
