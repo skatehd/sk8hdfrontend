@@ -11,20 +11,24 @@ import {
   Message,
   Loading,
   Dialog,
+  Tabs,
+  TabPane
 } from 'element-ui'
 
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker , LPopup} from 'vue2-leaflet';
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import infiniteScroll from 'vue-infinite-scroll'
+import VueImg from 'v-img';
 
 
 
 Vue.use(infiniteScroll)
+Vue.use(VueImg);
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
-
+Vue.component('l-popup', LPopup)
 // @ts-ignore
 delete Icon.Default.prototype._getIconUrl;
 
@@ -43,6 +47,9 @@ Vue.component(Input.name, Input)
 Vue.component(Button.name, Button)
 Vue.component(Message.name, Message)
 Vue.component(Dialog.name, Dialog)
+Vue.component(Tabs.name, Tabs)
+Vue.component(TabPane.name, TabPane)
+
 
 Vue.prototype.$message = Message;
 

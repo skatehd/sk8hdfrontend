@@ -1,9 +1,11 @@
 <template>
         <div class='thread_wrapper' v-loading="loading">
-            <h1>{{thread.title}}</h1>
-             <span class="txt-small txt-emph">{{thread.owner.username}} &nbsp;</span> 
-             <span class="txt-small">{{formatdate(thread.date)}}</span>
-            <p>{{thread.content}}</p> 
+             <div class="mt-1">
+                 <span class="txt-small txt-emph">{{thread.owner.username}} &nbsp;</span> 
+                 <span class="txt-small">{{formatdate(thread.date)}}</span>
+             </div>
+            <h1 class="mt-1 mb-0">{{thread.title}}</h1>
+            <p class="txt-white">{{thread.content}}</p> 
             <!-- '🙉' : '🙈' -->
         <div v-if="!collapse">
             <div v-if="commentsLoaded && comments.length === 0">
@@ -22,7 +24,7 @@
             </div>
             <LoginOrRegister v-else top="Du musst dich" bottom="um einen Kommentar zu schreiben"></LoginOrRegister>
         </div>
-            <button class="emoji-medium btn-no-border txt-center fill-width" @click="collapse = !collapse">{{collapse ? '+' : '-' }}</button>
+            <button class="emoji-medium btn-dash txt-center fill-width mb-1" @click="collapse = !collapse">{{collapse ? '+' : '-' }}</button>
         </div>
 </template>
 

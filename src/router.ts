@@ -6,6 +6,7 @@ import Registration from './views/Register.vue';
 import Login from './views/Login.vue';
 import NotFound from './views/404.vue';
 import BilloBoard from './views/BilloBoard.vue';
+import ShredMap from './views/ShredMap.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -37,6 +38,11 @@ export default new Router({
       path: '/board',
       name: 'board',
       component: BilloBoard,
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: ShredMap,
     },
     {
       path: '/about',

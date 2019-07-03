@@ -1,20 +1,20 @@
 <template>
         <div class='comment_card' v-loading="loading">
             <!-- <img :src="imageSrc()" class='event_card__image'> -->
-            <p class="comment-content txt-white">
+            <p class="comment-content txt-white mt-0">
             {{commentTree.content}} 
            </p>  
              <span class="txt-small txt-emph">{{commentTree.owner.username}} &nbsp;</span> 
              <span class="txt-small">{{formatdate(commentTree.date)}}</span>
-           <button class="btn reply-btn" @click="reply = !reply">↩️</button>
-           <button v-if="commentTree.children.length > 0" class="btn reply-btn " @click="collapse = !collapse">{{collapse ? '🙉' : '🙈' }}</button>
+           <button class="btn reply-btn" @click="reply = !reply">↩️</button> <br>
+           <button v-if="commentTree.children.length > 0" class="btn reply-btn pl-0 pt-0" @click="collapse = !collapse">{{collapse ? '🙉' : '🙈' }}</button>
          <CommentEditor v-if="reply"  @send="sendMessage" class="comment__editor"></CommentEditor>
         <div v-if="!collapse">
         <CommentComponent  v-for="comment of commentTree.children" v-bind:key="comment.id"
         @changes="emitChange()"
         :replyPath="replyPath"
          :commentTree="comment"
-         class="subcomment">
+         class="subcomment pt-05">
         </CommentComponent>
         </div>
         </div>
@@ -93,7 +93,6 @@ export default class CommentComponent extends Vue {
   // padding: 1rem
   padding-left: 1 rem
   padding-bottom: 1 rem
-  margin 0
   // border-width 1px
   // border-radius: 16px;
   text-align: left

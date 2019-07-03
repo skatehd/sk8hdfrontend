@@ -15,11 +15,11 @@
           >
           <l-map
           v-if="event.location !== null"
-        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
         :center="event.location.coordinates"
         :zoom="15"
         style="height: 400px; width: 100%">
-              <l-tile-layer url="http://tile.stamen.com/toner/{z}/{x}/{y}.png"></l-tile-layer>
+              <l-tile-layer url="http://tile.stamen.com/toner/{z}/{x}/{y}.png"         attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+></l-tile-layer>
                   <l-marker :lat-lng="event.location.coordinates" ></l-marker>
         </l-map>
 
