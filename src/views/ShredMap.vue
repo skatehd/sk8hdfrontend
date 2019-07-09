@@ -1,6 +1,6 @@
 <template>
   <div class='shredmap header-margin'>
-      <h1>Shred Map </h1>
+      <h1>🗺️ Shred Map </h1>
       <button class='btn-dash mb-1' @click="dialogVisible = true"> 🛹 Spot hinzufügen</button>
         <l-map
         :center="center"
@@ -8,7 +8,7 @@
         class="main-map">
               <l-tile-layer url="http://tile.stamen.com/toner/{z}/{x}/{y}.png"         attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
 ></l-tile-layer>
-              <l-marker v-for="spot in spots" @click="spotClicked(spot)" :lat-lng="spot.location" >
+              <l-marker v-for="spot in spots" @click="spotClicked(spot)" :lat-lng="spot.location" v-bind:key="spot.id">
                   <l-popup>
                     {{spot.name}}     
                   </l-popup>
@@ -86,26 +86,30 @@ export default class CommentComponent extends Vue {
      minute:'2-digit'});
   }
 
-  spotClicked(spot: {}) {
+  spotClicked(spot: {id: number}) {
       this.selectedId = spot.id;
   }
 
     createSpot(){
         if(this.selectedPoint === null){
+            // @ts-ignore
             this.$message('Du musst einen Punkt auf der Karte auswaehlen um einen Spot zu erstellen');
             return;
         }   
         if(this.title === '') {
+                        // @ts-ignore
             this.$message('Du musst einen Namen eingeben um einen Spot zu erstellen');
             return;
         }
 
         axios.post(`${apiUrl}/map/`, {name: this.title, location: {coordinates: this.selectedPoint.reverse(), type: 'Point'}})
             .then(result => {
+                            // @ts-ignore
                 this.$message('Spot hinzugefuegt! Adde noch einen Kommentar oder paar Bilder damit man weiss was da geht.');    
                 this.dialogVisible = false;
             },
             error => {
+                            // @ts-ignore
                 this.$message('Irgendwas ist schief gelaufen versuch es spaeter nochmal');
                 console.log(error)
             })
@@ -119,7 +123,7 @@ export default class CommentComponent extends Vue {
     created(){
         axios.get(`${apiUrl}/map/`)
         .then(result => {
-            this.spots = result.data.map(obj => {return {
+            this.spots = result.data.map((obj: any) => {return {
                 name: obj.name,
                 location: obj.location.coordinates.reverse(),
                 id: obj.id,

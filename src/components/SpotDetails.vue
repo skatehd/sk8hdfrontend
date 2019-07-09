@@ -2,9 +2,29 @@
         <div class='spot-details mt-2 ml-1 mr-2 ml-2 ' v-loading="loading">
             <h1>{{name}}</h1>
 
-              <div class='img-grid'>
-                <img class="spot__image" v-for="image in images" v-img:name :src="image.image" >
+              <div class="objects_header">
+                <h3> Was es so gibt: </h3> 
+                <button v-if="isLoggedIn()" class='btn-dash ml-2 p-05 btn-add' @click="showObjectDialog = true"> + Hinzufügen</button>
               </div>
+              <div v-if="skateobjects.length>0">
+                <ul>
+                  <li v-for="skateobject in skateobjects" v-bind:key="skateobject">
+                    {{skateobject.name}}
+                  </li>
+                </ul>
+              </div>
+              <p v-else>
+                Noch keine Eintraege 
+                Falls du weisst was es an dem Spot gibt (Rails, Ramps, etc.), dann {{isLoggedIn() ? '' : 'melde dich an und fuege etwas hinzu.'}}
+                <a v-if="isLoggedIn()" @click="showObjectDialog = true">fuege es hinzu</a>
+              </p>
+              <h3>Bilder:</h3>
+
+              <div class='img-grid'>
+                <img class="spot__image" v-for="image in images" v-img:name :src="image.image" v-bind:key="image.image">
+              </div>
+
+              <h3>Kommentare:</h3>
 
                   <div v-if="comments.length === 0">
                       Bisher noch keine Kommentare
@@ -20,8 +40,20 @@
                   </div>
                   <LoginOrRegister v-else top="Du musst dich" bottom="um einen Kommentar zu schreiben"></LoginOrRegister>
 
+          <el-dialog 
+          v-loading="loading"
+          :title="`Objekt zu ${name} hinzufuegen`"
+          :visible.sync="showObjectDialog">
+            <div class="mb-1" v-for="skateobject in skateobjects" v-bind:key="skateobject">
+                  {{skateobject.name}}
+            </div>
+            <input class="txt-input" type="text" v-model="objectEdit" maxLength="128">
+            <button class="btn ml-1" @click="addObject">+</button>
+            <br>
+            <button class="btn mt-2 fill-width" @click="showObjectDialog=false">Fertig</button>
+          </el-dialog>
+
           </div>
-        </div>
 </template>
 
 <script lang="ts">
@@ -50,9 +82,12 @@ export default class ThreadView extends Vue {
   loaded = false;
   comments: CommentTree[] = [];
   images = [];
+  skateobjects = [];
   loadingComments = false;
   name = ''
   activeName = 'first'
+  showObjectDialog = false;
+  objectEdit = '';
 
   formatdate(datestring: string) {
       const date = new Date(datestring);
@@ -69,13 +104,32 @@ export default class ThreadView extends Vue {
       this.loadDetails();
     }
 
+    addObject(){ 
+      console.log('ADd object')
+      console.log(this.objectEdit)
+      if(this.objectEdit === '') {
+        // TODO: show error
+        return;
+      }
+      this.loading = true;
+      axios.post(`${apiUrl}/map/${this.id}/object/`, {name: this.objectEdit }).then(
+          response => {
+            this.objectEdit = '';
+            this.loadDetails()
+          },
+          error => {}
+      )      
+    }
+
     loadDetails() {
       axios.get(`${apiUrl}/map/${this.id}/`).then(
           response => {
             this.comments = buildCommentTree(response.data.comments);
             this.name = response.data.name;
             this.images = response.data.images;
+            this.skateobjects = response.data.skateobjects
               console.log(response)
+            this.loading = false;
             this.loaded = true;
           },
           error => {}
@@ -94,7 +148,7 @@ export default class ThreadView extends Vue {
       content: message,
     } ).then(
         result => {
-          this.loadComments();
+          this.loadDetails();
           this.loading = false;
         },
         error => {
@@ -116,15 +170,22 @@ export default class ThreadView extends Vue {
 <style scoped lang="stylus">
 
 .img-grid
-  display grid
-  grid-template-columns repeat(auto-fit, 300px)
-  grid-gap: 1rem
-  grid-auto-rows: auto;
-  grid-auto-flow: row dense;
+  display: flex
+  height: 200px
+  overflow-x scroll
+  overflow-y hidden
 
 .spot__image
-  width 300px
-  
+  width 200px
+  height 200px
+  object-fit cover
+
+.btn-add
+  height 2rem
+
+.objects_header
+  display: flex  
+  align-items center
 
 .spot-details
   padding-bottom 4rem

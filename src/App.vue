@@ -3,13 +3,14 @@
     <div id="nav">
       <Push class="hidden-desktop" right>
       <img @click="home" src="/logo.png" class="burger__logo clickable">
-       <div v-if="isLoggedIn()" class="nav__logout" @click="logout"> 
+       <p @click="$router.push('/board')" class="router-link">📝 BilloBoard</p> <br/>
+       <p @click="$router.push('/map')" class="router-link">🗺️ ShredMap</p> <br/>
+       <p v-if="isLoggedIn()" class="router-link" @click="logout"> 
         Ausloggen
-      </div> 
+      </p> 
      <div v-else class='burger-menu__login-register' >
        <p @click="$router.push('/login')" class="router-link">Anmelden</p> <br/>
-       <p @click="$router.push('/register')" class="router-link">Registrieren</p> <br/>
-       
+       <p @click="$router.push('/register')" class="router-link">Registrieren</p> <br/>      
      </div>
       <!-- <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link> -->
@@ -22,9 +23,9 @@
      <div v-else class="nav__logout">
        <router-link to="/login">Anmelden</router-link> | <router-link to="/register">Registrieren</router-link>
      </div>
-      <router-link  to="/">Home</router-link> 
-      <!-- |
-      <router-link to="/about">About</router-link> -->
+      <router-link  to="/">Home</router-link> | 
+      <router-link to="/board">📝 BilloBoard</router-link> |  
+      <router-link to="/map">🗺️ ShredMap</router-link> 
 
         </div>
     </div>
@@ -56,6 +57,9 @@ body
 
 .burger-menu__login-register
   display: block
+
+.bm-menu
+  z-index: 9999999
 
 .bm-burger-button
   position: fixed
