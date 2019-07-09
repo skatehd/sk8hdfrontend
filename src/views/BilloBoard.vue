@@ -29,7 +29,7 @@
 </template>
 
 <style lang="stylus">
-.board__edit_title: 
+.board__edit_title
     width: 100%
     background-color: #000000
     color: #fff

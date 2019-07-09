@@ -102,7 +102,6 @@ body
       color #42b983
 
 
-
 /* Visibility Helpers */
 @media only screen and (min-width: 769px) {
   .visible-mobile, .visible-tablet, .hidden-desktop {
