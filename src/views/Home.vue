@@ -30,33 +30,20 @@
           👋 Über Uns 
         </h1>
         <p>
-        Heidelberg Skateboarding e.V. ist der erste Skateboarding Verein in Heidelberg.
-        </p>
-        <p>
-        Skateboarding ist ein sehr cooler Sport. Anders als bei vielen anderen Sportarten spielt beim Skateboarding niemand gegeneinander sondern alle zusammen. <br> 
-        Es geht darum coole Tricks zu machen und dabei wird jeder von den anderen unterstützt. Es gibt keine schlechten Spieler mit denen niemand zusammen spielen will, stattdessen wird jeder Erfolg gefeiert, auch wenn es ein Trick ist der voll einfach ist. 
-        </p>
-        <p>
-        Ziele von Heidelberg Skateboarding e.V. sind
-        <ul>
-          <li>
-            Kinder, Jugendliche und Erwachsene für Skateboarding zu begeistern 
-          </li>
-          <li>
-            Kindern, Jugendlichen und Erwachsenen die Möglichkeit zu geben zusammen zu spielen, ohne Leistungsdruck und ohne Gruppen/-trennung oder -zwang
-          </li>
-          <li>
-            Gegen Vorurteile und Repression gegenüber Minderheiten und Skateboarder zu kämpfen
-          </li>
-          <li>
-            Eine positive Gemeinschaft zu bilden in der sich jeder wohl fühlt, unabhängig von Geschlecht, Alter, Hautfarbe, Muttersprache oder Meinung
-          </li>
-          <li>
-            Die Skateboarding Gemeinschaft zu unterstützen durch Events, Wettbewerbe sowie die Einflußnahme auf politische Entscheidungen bezüglich des Baus und des Erhalts von Skate/-parks und Locations. 
-          </li>
-          </ul> 
-        </p>
+        Heidelberg Skateboarding e. V. Ist der erste Verein zur Förderung der Skateboardkultur in Heidelberg<br>
+        Durch die Aufnahme in das olympische Programm zu den Sommerspielen in Tokyo 2020 hat die Versportlichung von Skateboarding einen neuen Höhepunkt erreicht. Jedoch ist es nichts Neues, dass szenefremde Akteure (wie in diesem Fall das IOC) versuchen, Skateboarding für ihre Zwecke zu instrumentalisieren. Dabei geht jedoch immer etwas Essenzielles verloren, was Skateboarding ausmacht – seine Vielseitigkeit. Egal ob auf der Straße oder in Skateparks, beim Skaten spielt niemand gegeneinander, sondern alle zusammen. Es geht darum, sich kreativ mit seiner Umwelt auseinanderzusetzen und selbstbestimmt neue Tricks zu lernen. Dabei wird jeder von den anderen unterstützt. Es gibt keine schlechten Spieler, mit denen niemand zusammenspielen will, stattdessen wird jeder Erfolg und jeder Trick, auch wenn er noch so einfach sein mag, gefeiert und der Spaß an der Freude steht im Vordergrund!<br>
+        Dem  globalen Trend der Sportifizierung, Standardisierung und Fremdbestimmung im Skateboarding wollen wir durch die Gründung des Heidelberg Skateboarding e.V. auf lokaler Ebene entgegenwirken. Skateboarding soll in den Händen der Skaterinnen und Skater bleiben. Mit diesem Verein wollen wir den Heidelberger Skaterinnen und Skatern Möglichkeiten zur Gestaltung der lokalen Szene eröffnen. Wir grenzen uns deshalb davon ab, ein Sportverein zu sein. Bei uns steht die Förderung der Skateboardkultur in seiner gesamten Bandbreite im Vordergrund!<br><br>
 
+        Ziele von Heidelberg Skateboarding e. V sind.:<br><br>
+
+      <ul>
+        <li> Die Förderung und Unterstützung der Skateboardkultur in Heidelberg und Umgebung – durch die Veranstaltung von verschiedenen Events, Contests, Skatekursen und das damit verbundene Zusammenkommen der regionalen und überregionalen Skateboardgemeinschaft. </li>
+        <li> Kinder, Jugendliche und Erwachsene für Skateboarding zu begeistern. </li>
+        <li> Kindern, Jugendlichen und Erwachsenen die Möglichkeit geben zusammen zu spielen (zu skaten) und sich dabei frei zu entfalten. </li>
+        <li> Gegen Vorurteile und Repression von Minderheiten und SkateboarderInnen zu kämpfen. </li>
+        <li> Eine positive Gemeinschaft zu bilden in der sich jeder wohl fühlt, unabhängig von Geschlecht, Alter, Hautfarbe, Muttersprache oder Meinung. </li>
+        <li> Eine Rolle als kommunizierendes und beratendes Bindeglied zwischen der Skateboardgemeinschaft und der Stadt einzunehmen um die Einflussnahme auf den Bau und Erhalt von Skateparks zu vergrößern, sowie das Auftreten als Sprachrohr für alle Skateboard relevanten Belangen. </li>
+      </ul>    
 
         <h1 id="antrag">
           📝 Mitgliederantrag 
@@ -78,7 +65,15 @@
           </ul>
 
           Der <a href="Beitrittserklaerung.pdf" download>Mitgliederantrag</a> muss ausgedruckt und geschickt (bzw. vorbeigebracht) werden weil wir ein SEPA Lastschriftmandat mit Unterschrift brauchen. 
-          Bei Events haben wir aber auch immer ein paar Beitrittserklaerungen dabei. 
+          Bei Events haben wir aber auch immer ein paar Beitrittserklaerungen dabei.
+          <br> <br>
+          Möglichkeiten zur Abgabe des Mitgliedsantrags:<br><br>
+          <ul>
+            <li>Planet Sports Heidelberg, Hauptstraße 107, Heidelberg Altstadt </li>
+             <li>Pascal Orawa, Klausenpfad 10, Heidelberg Handschusheim</li>
+             <li>Julian Sroczinski, Mannheimerstr. 65, Heidelberg Wieblingen</li>
+               <li>Josh Weidlich, Plöck 10, Heidelberg Altstadt</li>
+              </ul>
         </p>
      </div>
 

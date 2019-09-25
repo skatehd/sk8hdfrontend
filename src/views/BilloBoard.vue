@@ -10,17 +10,16 @@
     </div>
     <el-dialog   
     class='dialog'
-
     title="Einen neuen Thread erstellen"
     :visible.sync="dialogVisible">
         <p>
             Titel:
         </p> 
-        <input class="board__edit_title txt-input fill-width mr-2rem" type="text" v-model="title">
+        <input class="dialoginput txt-input fill-width mr-2" type="text" v-model="title">
         <p>
             Text: 
         </p>
-        <textarea class="txt-input fill-width mr-2rem" v-model="content"></textarea>
+        <textarea class="dialoginput txt-input fill-width mr-2" v-model="content"></textarea>
         <br>
         <button class="btn mt-16" @click="createThread()">Thread Erstellen</button>
 
@@ -33,6 +32,8 @@
     width: 100%
     background-color: #000000
     color: #fff
+
+
 
 .billoboard
     max-width 800px

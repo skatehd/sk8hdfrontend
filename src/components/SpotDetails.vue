@@ -18,11 +18,17 @@
                 Falls du weisst was es an dem Spot gibt (Rails, Ramps, etc.), dann {{isLoggedIn() ? '' : 'melde dich an und fuege etwas hinzu.'}}
                 <a v-if="isLoggedIn()" @click="showObjectDialog = true">fuege es hinzu</a>
               </p>
-              <h3>Bilder:</h3>
-
-              <div class='img-grid'>
+              <div class="objects_header">
+                <h3>Bilder:</h3>
+                <button v-if="isLoggedIn()" class='btn-dash ml-2 p-05 btn-add' @click="showFileDialog = true"> + Hinzufügen</button>
+              </div>
+              <div class='img-grid' v-if="images.length > 0">
                 <img class="spot__image" v-for="image in images" v-img:name :src="image.image" v-bind:key="image.image">
               </div>
+
+              <p v-else>
+                Noch keine Bilder vorhanden. 
+              </p>
 
               <h3>Kommentare:</h3>
 
@@ -33,6 +39,7 @@
                     v-for="comment of comments" v-bind:key="comment.id" 
                     :commentTree="comment" 
                     :replyPath='replyPath'
+                    @changes="loadDetails()"
                     class="event__comments">
                   </CommentComponent>
                   <div v-if="isLoggedIn()" class="event__comment-editor">
@@ -53,6 +60,16 @@
             <button class="btn mt-2 fill-width" @click="showObjectDialog=false">Fertig</button>
           </el-dialog>
 
+          <el-dialog
+          v-loading="loading"
+          :title="`Objekt zu ${name} hinzufuegen`"
+          :visible.sync="showFileDialog"
+          :before-close="closeImageDialog">
+              <Vue2Dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></Vue2Dropzone>
+            <br>
+            <button class="btn mt-2 fill-width" @click="closeImageDialog">Fertig</button>
+          </el-dialog>
+
           </div>
 </template>
 
@@ -62,6 +79,8 @@ import {CommentTree} from '@/models';
 import CommentEditor from '@/components/CommentEditor.vue'; 
 import CommentComponent from './CommentComponent.vue';
 import LoginOrRegister from './LoginOrRegister.vue';
+import Vue2Dropzone from 'vue2-dropzone';
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 import axios from 'axios';
 import apiUrl from '../apiUrl';
@@ -72,6 +91,7 @@ import { buildCommentTree } from '../comment_util';
     CommentEditor,
     CommentComponent,
     LoginOrRegister, 
+    Vue2Dropzone
   }
 })
 export default class ThreadView extends Vue {
@@ -87,7 +107,17 @@ export default class ThreadView extends Vue {
   name = ''
   activeName = 'first'
   showObjectDialog = false;
+  showFileDialog = false;
   objectEdit = '';
+
+  dropzoneOptions = {
+          url: `${apiUrl}/map/${this.id}/images/`,
+          thumbnailWidth: 150,
+          maxFilesize: 3,
+          headers: { "Authorization": "Token " + this.$store.getters.token },
+          paramName: 'image',
+          acceptedFiles: 'image/*',
+      }
 
   formatdate(datestring: string) {
       const date = new Date(datestring);
@@ -135,6 +165,35 @@ export default class ThreadView extends Vue {
           error => {}
       )
     }
+    
+    closeImageDialog(){
+      this.showFileDialog = false;
+      this.loadImages();
+    }
+
+    loadImages() {
+      axios.get(`${apiUrl}/map/${this.id}/images/`).then(
+          response => {
+            this.images = response.data.results;
+              console.log(response)
+            this.loading = false;
+            this.loaded = true;
+          },
+          error => {}
+      )
+    }
+
+  loadComments() {
+      axios.get(`${apiUrl}/map/${this.id}/comments/`).then(
+          response => {
+            this.comments = buildCommentTree(response.data);
+              console.log(response)
+            this.loading = false;
+            this.loaded = true;
+          },
+          error => {}
+      )
+    }
 
 
 
@@ -148,7 +207,7 @@ export default class ThreadView extends Vue {
       content: message,
     } ).then(
         result => {
-          this.loadDetails();
+          this.loadComments();
           this.loading = false;
         },
         error => {

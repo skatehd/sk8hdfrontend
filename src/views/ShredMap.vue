@@ -29,7 +29,7 @@
             <p>
                 Name:
             </p> 
-            <input class="board__edit_title txt-input fill-width mr-2rem" type="text" v-model="title">
+            <input class="dialoginput txt-input fill-width mr-2rem" type="text" v-model="title">
             <br>
             <br>
             Location:

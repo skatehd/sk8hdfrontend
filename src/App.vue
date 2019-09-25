@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Push class="hidden-desktop" right>
+      <Push class="hidden-desktop" :right="true">
       <img @click="home" src="/logo.png" class="burger__logo clickable">
        <p @click="$router.push('/board')" class="router-link">📝 BilloBoard</p> <br/>
        <p @click="$router.push('/map')" class="router-link">🗺️ ShredMap</p> <br/>
@@ -29,7 +29,9 @@
 
         </div>
     </div>
-    <router-view/>
+    <div id="page-wrap" class="fill-height">
+    <router-view />
+    </div>
   </div>
 </template>
 <style lang="stylus">
