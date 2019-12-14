@@ -7,7 +7,7 @@
       <img id="hero-pic" class="hidden-desktop" src="headermobile.jpg" alt>
         <div class="main__header_content">
           <img src="animated_logo.gif" id="animated_logo">
-          <h1 class="visible-desktop">Das die Website von HD Skateboarding e.V.</h1>
+          <h1 class="visible-desktop">Das ist die Website von HD Skateboarding e.V.</h1>
           <!-- <p class="visible-desktop">
             HD Skateboarding e.V. ist der Skateboard Verein von Heidelberg.
             <br>Alle machen mit - egal ob Mädchen oder Junge, Albaner oder Sachse, sogar unsere Freunde von der Polizei kommen jeden Tag am Skatepark vorbei, weil wir so cool skaten.
@@ -18,14 +18,14 @@
     <div class="main__content">
      <div class="main__about">
 
-        <div>
+        <!-- <div>
           <h1>📅 Anstehende Events</h1>
           <div class='main__events'>
           <EventCard v-for='event of events.slice(0,4)' v-bind:key='event.id' :event='event'>              
           </EventCard>
           </div>
         </div>
-
+ -->
         <h1 id="about">
           👋 Über Uns 
         </h1>
@@ -77,6 +77,7 @@
         </p>
      </div>
 
+      <a href="/satzung"><h1>Vereinssatzung</h1></a>
     </div>
   </div>
 </template>

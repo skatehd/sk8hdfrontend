@@ -6,7 +6,10 @@ import Registration from './views/Register.vue';
 import Login from './views/Login.vue';
 import NotFound from './views/404.vue';
 import BilloBoard from './views/BilloBoard.vue';
+
 import ShredMap from './views/ShredMap.vue';
+import Satzung from './views/Satzung.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -19,31 +22,36 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/event/:id',
-      name: 'event',
-      component: Event,
-      props: true,
+      path: '/satzung',
+      name: 'satzung',
+      component: Satzung,
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: Registration,
-    },
-    {
-      path: '/login',
-      name: 'loginr',
-      component: Login,
-    },
-    {
-      path: '/board',
-      name: 'board',
-      component: BilloBoard,
-    },
-    {
-      path: '/map',
-      name: 'map',
-      component: ShredMap,
-    },
+    // {
+    //   path: '/event/:id',
+    //   name: 'event',
+    //   component: Event,
+    //   props: true,
+    // },
+    // {
+    //   path: '/register',
+    //   name: 'register',
+    //   component: Registration,
+    // },
+    // {
+    //   path: '/login',
+    //   name: 'loginr',
+    //   component: Login,
+    // },
+    // {
+    //   path: '/board',
+    //   name: 'board',
+    //   component: BilloBoard,
+    // },
+    // {
+    //   path: '/map',
+    //   name: 'map',
+    //   component: ShredMap,
+    // },
     {
       path: '/about',
       name: 'about',

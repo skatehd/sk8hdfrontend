@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <Push class="hidden-desktop" :right="true">
       <img @click="home" src="/logo.png" class="burger__logo clickable">
        <p @click="$router.push('/board')" class="router-link">📝 BilloBoard</p> <br/>
@@ -12,9 +12,9 @@
        <p @click="$router.push('/login')" class="router-link">Anmelden</p> <br/>
        <p @click="$router.push('/register')" class="router-link">Registrieren</p> <br/>      
      </div>
-      <!-- <router-link to="/">Home</router-link> 
-      <router-link to="/about">About</router-link> -->
-      </Push>
+      <router-link to="/">Home</router-link> 
+      <router-link to="/about">About</router-link> 
+            </Push>
       <div class="visible-desktop header-desktop" >
       <img src="/logo.png"  @click="home" class="header__logo header__left clickable">
       <div v-if="isLoggedIn()" class="nav__logout" @click="logout"> 
@@ -28,7 +28,7 @@
       <router-link to="/map">🗺️ ShredMap</router-link> 
 
         </div>
-    </div>
+    </div> -->
     <div id="page-wrap" class="fill-height">
     <router-view />
     </div>
