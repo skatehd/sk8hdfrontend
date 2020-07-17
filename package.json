@@ -14,7 +14,7 @@
     "core-js": "^2.6.5",
     "element-ui": "^2.9.1",
     "leaflet": "^1.5.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "v-img": "^0.2.0",
     "vue": "^2.6.10",
     "vue-burger-menu": "^2.0.1",
